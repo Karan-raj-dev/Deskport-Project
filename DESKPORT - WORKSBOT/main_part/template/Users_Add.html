@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+        {% block content %}
+
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                    Add New User
+                </h3>
+                <div style="float: right;">
+                    <a href="Users"><button type="button" class="btn btn-primary btn-sm" style="font-size: 15px;">Back</button></a>
+                </div>
+              </div>              
+              
+              <!--form for new user-->
+
+              <div class="card">
+                <div class="card-body">
+                    <form id="userform" action="U_add" method="POST">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                                <input type="text" id="user-name" class="form-control" placeholder="Enter Name" name="username">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Email</label>
+                                <input type="email" id="user-email" class="form-control" placeholder="Enter Email" name="useremail">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Status</label>
+                                <select class="form-control" id="user-status" name="userstatus">
+                                    <option value="">Select Status</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="user-password" style="height: 37px;" name="userpassword">
+                            </div>
+                        </div>
+                        <div class="error_msg" id="incompleteform" style="display: none;">Please fill up all the fields</div>
+                        <input type="submit" value="Save User" onclick="return validate()" class="btn" style="padding: 1%; text-align: center; width: 100%; background-color: #392C70; border: none; color: white;">
+                        <!--Have to chage color-->
+                    </form>                  
+                </div>
+              </div>              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+          <div id="successpopup">
+            <img src="{% static 'Resource/sucessgif.gif' %}" alt="Sucess">
+            <div>
+              <h3>The User is successfully registered</h3>
+              <p>Your user can be used now!</p>
+            </div>
+          </div>
+          <script>
+            var pop=document.getElementById("successpopup");
+          var form=document.getElementById("userform");
+          var errormsg=document.getElementById("incompleteform");
+          
+          function validate(){
+    
+
+            errormsg.style.display="none";
+              var username=document.getElementById("user-name").value;
+              var useremail=document.getElementById("user-email").value;
+              var userstatus=document.getElementById("user-status").value;
+              var userpassword=document.getElementById("user-password").value;
+
+              
+              if(username=="" || useremail=="" || userstatus=="" || userpassword==""){
+                errormsg.style.display="block";
+              }
+              else{
+                pop.style.display="block";
+                window.setTimeout(()=>{
+                  form.submit();
+                },2000)
+              }
+              return false;
+          }
+          </script>
+
+          {% endblock %}

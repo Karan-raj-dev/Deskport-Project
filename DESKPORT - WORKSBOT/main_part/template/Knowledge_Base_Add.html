@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+        {% block content %}
+
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                    Add New Knowledge Base
+                </h3>
+                <div style="float: right;">
+                    <a href="Knowledge_Base"><button type="button" class="btn btn-primary btn-sm"  style="font-size: 15px;">Back</button></a>
+                </div>
+              </div>              
+              
+              <!--Form for new knownledge base add-->
+
+              <div class="card">
+                <div class="card-body">
+                    <form id="kbform" action="K_add" method="POST">{% csrf_token %}
+                        <label>Department</label>
+                        <select class="form-control" id="knowlege-base-Department" name="knowlegebaseDepartment">
+                            <option value="">Select Department</option>
+                            <option value="Host">Host</option>
+                            <option value="Domain">Domain</option>
+                        </select>
+                        <label>Title</label>
+                        <input type="text" id="knowlege-base-title" class="form-control" placeholder="Enter Title" name="knowlegebasetitle">
+                        <label>Description</label>
+                        <textarea class="form-control" id="simpleMde" name="knowlegebasedescription"></textarea>
+                        <label>Status</label>
+                        <div class="radios">
+                          <input type="radio" name="knowlegebaserequired" class="required" value="Published"><span>Published</span>
+                          <input type="radio" name="knowlegebaserequired" class="required" value="Unpublished"><span>Unpublished</span>
+                        </div>
+                        <hr>
+                        <div class="error_msg" id="incompleteform" style="display: none;">Please fill up all the fields</div>
+                        <input type="submit" class="btn" value="Save" onclick="return validate()" style="width: 100%; padding: 7px; background-color: #392C70; border: none; color: white;">
+                        <!--color have to change-->
+                    </form>                    
+                </div>
+              </div>
+              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+          <div id="successpopup">
+            <img src="{% static 'Resource/sucessgif.gif' %}" alt="Sucess">
+            <div>
+              <h3>The Knowledge Base is successfully registered</h3>
+              <p>Your knownledge base can be used now!</p>
+            </div>
+          </div>
+          <script>
+            var pop=document.getElementById("successpopup");
+          var form=document.getElementById("kbform");
+          var errormsg=document.getElementById("incompleteform");
+          
+          function validate(){
+            var flag1=0;
+
+            errormsg.style.display="none";
+              var knowlegebaseDepartment=document.getElementById("knowlege-base-Department").value;
+              var knowlegebasetitle=document.getElementById("knowlege-base-title").value;
+              var message=document.getElementById("simpleMde").value;
+              var required=document.getElementsByClassName("required");
+              
+              for(var i=0;i<required.length;i++){
+                if(required[i].checked){
+                  flag1=1;
+                }
+              }
+              
+              if(knowlegebaseDepartment=="" || knowlegebasetitle=="" || flag1==0){
+                errormsg.style.display="block";
+              }
+              else{
+                pop.style.display="block";
+                window.setTimeout(()=>{
+                  form.submit();
+                },2000)
+              }
+              return false;
+          }
+          </script>
+
+          {% endblock %}
+        

@@ -1,0 +1,108 @@
+{% extends 'user_base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="main-panel" style="float: left;">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title">
+          New Ticket
+        </h3>
+        <div style="float: right;">
+            <a href="User_Dashboard"><button type="button" class="btn btn-primary btn-sm">Back</button></a>
+        </div> 
+      </div>              
+      
+      <!--Form for new ticket-->
+
+      <div class="card">
+        <div class="card-body">
+            <i class="fa fa-question" style="position: relative;left: 50%; font-size: 30px;"></i>
+            <h4 class="modal-title" style="text-align: center; margin-bottom: 2%;">Whats happening? Write us.</h4>
+            <form id="ticketform" action="User_Add_Ticket" method="POST">{% csrf_token %}
+                <label>Title</label>
+                <input class="form-control" type="text" id="problem-title" name="problemtitle" placeholder="Enter Problem Title">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Department</label>
+                        <select class="form-control" id="Department" name="department">
+                            <option value="">Select Department</option>
+                            <option value="Host">Host</option>
+                            <option value="Domain">Domain</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Priority</label>
+                        <select class="form-control" id="Priority" name="priority">
+                            <option value="">Select Priority</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <label>Message</label>
+                <textarea class="form-control" id="simpleMde" name="message" style="z-index:0"></textarea>
+                <label>Website</label>
+                <input class="form-control" type="text" id="Website-link" name="website" placeholder="Enter your Website link">
+                <label>File</label>
+                <input class="form-control" type="file" id="file" style="border: none;" name="file">
+                <label>Products</label>
+                <select id="product" class="form-control" name="product">
+                    <option value="helpy">Helpy</option>
+                    <option value="livechat">Livechat</option>
+                    <option value="freshdesk">Freshdesk</option>
+                </select>
+                <div class="error_msg" id="incompleteform" style="display: none;">Please fill up all the fields</div>
+                <input type="submit" value="Submit Ticket" class="btn" onclick="return validate()" style="padding: 1%; text-align: center; width: 100%; background-color: #392C70; border: none; color: white;">
+                <!--Have to chage color-->
+            </form>
+        </div>
+      </div>
+      
+    </div>
+    <footer class="footer">
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+      </div>
+    </footer>
+  </div>
+  <div id="successpopup">
+    <img src="{% static 'Resource/sucessgif.gif' %}" alt="Sucess">
+    <div>
+      <h3>The Ticket is successfully registered</h3>
+      <p>Your issue will be solved!</p>
+    </div>
+  </div>
+  <script>
+    var pop=document.getElementById("successpopup");
+  var form=document.getElementById("ticketform");
+  var errormsg=document.getElementById("incompleteform");
+  function validate(){
+    
+    errormsg.style.display="none";
+      var problemtitle=document.getElementById("problem-title").value;
+      var department=document.getElementById("Department").value;
+      var priority=document.getElementById("Priority").value;
+      var message=document.getElementById("simpleMde").value;
+      var websitelink=document.getElementById("Website-link").value;
+      var product=document.getElementById("product").value;
+      console.log(message);
+      if(problemtitle=="" || department=="" || priority=="" || websitelink=="" || product==""){
+        errormsg.style.display="block";
+      }
+      else{
+        pop.style.display="block";
+        window.setTimeout(()=>{
+          form.submit();
+        },2000)
+      }
+      return false;
+  }
+  </script>
+
+
+{% endblock %}

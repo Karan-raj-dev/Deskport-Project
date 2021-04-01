@@ -1,0 +1,271 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Deskport</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'Landing_page/assets/img/favicon.ico' %}" />
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'Style/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'Style/vendor.bundle.addons.css' %}">
+    <link rel="stylesheet" href="{% static 'Style/style.css' %}">
+
+    <style>
+      .CodeMirror{
+        z-index:0;
+      } 
+    </style>
+</head>
+<body>
+    <div class="container-scroller">
+        <!--navbar start-->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar" style="position: relative;">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo" href="/Admin_Dashboard"><img src="images/logo.svg" alt="DESKPORT"/></a>
+              <a class="navbar-brand brand-logo-mini" href="/Admin_Dashboard"><img src="images/logo-mini.svg" alt="DESKPORT"/></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-stretch">
+              
+              <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item" style="font-size: 18px; font-weight: 200;">
+                    <a href="/Admin_Dashboard" id="home-link" style="color: #392C70;">Home</a><!--color have to change-->
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                    <i class="fas fa-bell mx-0"></i>
+                    <span class="count">16</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                    <a class="dropdown-item">
+                      <p class="mb-0 font-weight-normal float-left">You have 16 new notifications
+                      </p>
+                      <span class="badge badge-pill badge-warning float-right">View all</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-danger">
+                          <i class="fas fa-exclamation-circle mx-0"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <h6 class="preview-subject font-weight-medium">Application Error</h6>
+                        <p class="font-weight-light small-text">
+                          Just now
+                        </p>
+                      </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-warning">
+                          <i class="fas fa-wrench mx-0"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <h6 class="preview-subject font-weight-medium">Settings</h6>
+                        <p class="font-weight-light small-text">
+                          Private message
+                        </p>
+                      </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-info">
+                          <i class="far fa-envelope mx-0"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <h6 class="preview-subject font-weight-medium">New user registration</h6>
+                        <p class="font-weight-light small-text">
+                          2 days ago
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </li>
+                <li class="nav-item nav-profile dropdown" style="border: none;">
+                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                    <img src="{% static 'Resource/Default-icon.png' %}" alt="profile"/>
+                    <span id="user-name-nav" style="text-transform: capitalize;">{{user_name}}</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item">
+                      <i class="fas fa-user-circle text-primary"></i>
+                      Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'start_page' %}">
+                      <i class="fas fa-power-off text-primary"></i>
+                      Logout
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" id="toggle-btn" type="button" data-toggle="offcanvas">
+                <span class="fas fa-bars"></span>
+              </button>
+            </div>
+        </nav>
+        <!--navbar ends-->
+        <!--sidebar starts-->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar" style="float: left;">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/Admin_Dashboard">
+                  <i class="fa fa-home menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#Tickets" aria-expanded="false" aria-controls="Tickets">
+                  <i class="fa fa-ticket menu-icon"></i>
+                  <span class="menu-title">Tickets</span>
+                <i class="menu-arrow"></i>
+                  <!--color have to change-->
+                </a>
+                <div class="collapse" id="Tickets">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/All_Tickets">All Tickets</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Open Tickets</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Closed Tickets</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/Custom_Fields">Custom Fields</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#departments" aria-expanded="false" aria-controls="departments">
+                  <i class="fa fa-list menu-icon"></i>
+                  <span class="menu-title">Departments</span>
+                <i class="menu-arrow"></i>
+                  <!--color have to change-->
+                </a>
+                <div class="collapse" id="departments">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/Departments">Manage</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/D_add">Add</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#knowledge_base" aria-expanded="false" aria-controls="knowledge_base">
+                  <i class="fa fa-leanpub menu-icon"></i>
+                  <span class="menu-title">Knowledge Base</span>
+                <i class="menu-arrow"></i>
+                  <!--color have to change-->
+                </a>
+                <div class="collapse" id="knowledge_base">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/Knowledge_Base">Manage</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/K_add">Add</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#staffs" aria-expanded="false" aria-controls="staffs">
+                  <i class="fa fa-user-secret menu-icon"></i>
+                  <span class="menu-title">Staffs</span>
+                <i class="menu-arrow"></i>
+                  <!--color have to change-->
+                </a>
+                <div class="collapse" id="staffs">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/Staffs">Manage</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/S_add">Add</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
+                  <i class="fa fa-user menu-icon"></i>
+                  <span class="menu-title">Users</span>
+                <i class="menu-arrow"></i>
+                  <!--color have to change-->
+                </a>
+                <div class="collapse" id="users">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/Users">Manage</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/U_add">Add</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#manage_roles" aria-expanded="false" aria-controls="manage_roles">
+                  <i class="fa fa-shield menu-icon"></i>
+                  <span class="menu-title">Manage Roles</span>
+                <i class="menu-arrow"></i>
+                  <!--color have to change-->
+                </a>
+                <div class="collapse" id="manage_roles">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/Roles">Manage</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/R_add">Add</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#Settings" aria-expanded="false" aria-controls="Settings">
+                  <i class="fa fa-cogs menu-icon"></i>
+                  <span class="menu-title">Settings</span>
+                <i class="menu-arrow"></i>
+                  <!--color have to change-->
+                </a>
+                <div class="collapse" id="Settings">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="#">Notifications</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">FAQ</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#Frontend-Settings" aria-expanded="false" aria-controls="Frontend-settings">
+                    <i class="fa fa-list menu-icon"></i>
+                    <span class="menu-title">Frontend Settings</span>
+                  <i class="menu-arrow"></i>
+                    <!--color have to change-->
+                  </a>
+                  <div class="collapse" id="Frontend-Settings">
+                    <ul class="nav flex-column sub-menu">
+                      <li class="nav-item"> <a class="nav-link" href="#">Theme</a></li>
+                    </ul>
+                  </div>
+              </li>
+
+            </ul>
+          </nav>
+          <!--Sidebar ends-->
+          <!--Main content-->
+          {% block content %}
+
+          {% endblock %}
+          
+        </div>
+ 
+
+    
+
+    <script src="{% static 'Script/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'Script/vendor.bundle.addons.js' %}"></script>
+    <script src="{% static 'Script/off-canvas.js' %}"></script>
+    <script src="{% static 'Script/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'Script/misc.js' %}"></script>
+    <script src="{% static 'Script/settings.js' %}"></script>
+    <script src="{% static 'Script/todolist.js' %}"></script>
+    <script src="{% static 'Script/dashboard.js' %}"></script>
+    <script src="{% static 'Script/data-table.js' %}"></script>
+    <script src="{% static 'Script/jq.tablesort.js' %}"></script>
+    <script src="{% static 'Script/tablesorter.js' %}"></script>
+    <script src="{% static 'Script/summernote-bs4.min.js' %}"></script>
+    <script src="{% static 'Script/tinymce.min.js' %}"></script>
+    <script src="{% static 'Script/theme.js' %}"></script>
+    <script src="{% static 'Script/editorDemo.js' %}"></script>
+    
+</body>
+</html>

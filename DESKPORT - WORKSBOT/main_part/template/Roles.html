@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+        {% block content %}
+
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                    Roles
+                </h3>
+                <div style="float: right;">
+                    <a href="R_add"><button type="button" class="btn btn-primary btn-sm" style="font-size: 15px;">Add New</button></a>
+                </div>
+              </div>              
+              
+              <!--Table-->
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row" style="margin-top: 5px;">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>SL No</th>
+                                  <th>Title</th>
+                                  <th>Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for data in r_data %}
+                                <tr>
+                                  <td>{{data.id}}</td>
+                                  <td>{{data.roletitle}}</td>
+                                  <td>
+                                    <a href="Roles_Edit/{{data.id}}"><button class="role-edit-btn"><i class="fa fa-edit"></i></button></a>
+                                    <a href="Roles_Delete/{{data.id}}"><button class="role-delete-btn"><i class="fa fa-trash"></i></button></a>
+                                  </td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+
+          {% endblock %}
+       

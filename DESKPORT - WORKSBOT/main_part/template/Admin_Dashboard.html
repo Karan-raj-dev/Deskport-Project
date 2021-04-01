@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+
+        {% block content %}
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                  Dashboard
+                </h3>
+              </div>
+              <div class="container-fluid">
+                  <div class="row" style="color: white;">
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color: rgb(0,192,239); ">
+                            <div class="icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">USERS</p>
+                                <p class="number">68</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color: rgb(0,139,136); ">
+                            <div class="icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">STAFFS</p>
+                                <p class="number">1</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color: rgb(45,46,48); ">
+                            <div class="icon">
+                                <i class="fa fa-sitemap"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">DEPARTMENTS</p>
+                                <p class="number">5</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color: rgb(220,53,70); ">
+                            <div class="icon">
+                                <i class="fa fa-question-circle"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">KNOWLEDGE</p>
+                                <p class="heading" style="margin-top: 0px;">BASE</p>
+                                <p class="number">100</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                                           
+                  </div>
+                  <div class="row" style="color: white;">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color: rgb(251,173,75); ">
+                            <div class="icon">
+                                <i class="fa fa-smile"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">SATISFIED</p>
+                                <p class="number">1</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color: rgb(89,207,93); ">
+                            <div class="icon">
+                                <i class="fa fa-ticket"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">ALL TICKETS</p>
+                                <p class="number">4</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color:rgb(255,100,108); ">
+                            <div class="icon">
+                                <i class="far fa-envelope-open"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">OPEN TICKETS</p>
+                                <p class="number">3</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="box" style="background-color: rgb(30,98,241); ">
+                            <div class="icon">
+                                <i class="fa fa-times"></i>
+                            </div>
+                            <div class="info">
+                                <p class="heading">CLOSED</p>
+                                <p class="heading" style="margin-top: 0px;">TICKETS</p>
+                                <p class="number">1</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div style="clear: both;"></div>
+                </div>                    
+              </div>
+
+              <!--Table-->
+
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" style="background-color: rgb(231, 231, 231); padding: 20px;">Open Tickets</h4>
+                      <div class="row">
+                          <div class="col-md-4">
+                            <select class="form-control" style="padding: 5px; padding-right: 70px;">
+                                <option value="All Department">All Department</option>
+                                <option value="Host">Host</option>
+                                <option value="Domain">Domain</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <select class="form-control" style="padding: 5px; padding-right: 70px;">
+                                <option value="All Department">All Priority</option>
+                                <option value="Technical Support">High</option>
+                                <option value="Finance Department">Medium</option>
+                                <option value="Transport Department">Low</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <div id="datepicker-popup" class="input-group">
+                                <span class="far fa-calendar input-group-text" style="padding: 10px; font-size: 10px;"></span>
+                                <input type="date" class="form-control" style="font-size: 15px; padding: 10px;">
+                            </div>
+                          </div>
+                      </div>
+                  <div class="row" style="margin-top: 15px;">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table id="order-listing" class="table table-striped">
+                          <thead>
+                            <tr>
+                                <th>SL NO</th>
+                                <th>Department</th>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Priority</th>
+                                <th>User</th>
+                                <th>Status</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for data in t_data %}
+                            <tr>
+                                <td>{{data.id}}</td>
+                                <td>{{data.department}}</td>
+                                <td>{{data.problemid}}</td>
+                                <td class="highlighter">{{data.problemtitle}}</td>
+                                <td>{{data.priority}}</td>
+                                <td>{{data.user}}</td>
+                                <td>
+                                  <label class="badge badge-warning open-label">Open</label>
+                                </td>
+                                <td>{{data.date}}</td>
+                                <td>
+                                    <button class="btn btn-primary reply-btn">Reply</button>
+                                    <button class="btn btn-danger close-btn">Close</button>
+                                    <button class="btn btn-info reassign-btn">Re-Assign</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+          {% endblock %}
+    
+
+  

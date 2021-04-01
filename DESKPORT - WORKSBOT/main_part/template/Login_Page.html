@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deskport</title>
+
+    <link rel="stylesheet" href="{% static 'Style/all.min.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="{% static 'Style/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'Style/vendor.bundle.addons.css' %}">
+    <link rel="stylesheet" href="{% static 'Style/style.css' %}">
+
+
+
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+          <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+            <div class="row flex-grow">
+              <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                <div class="auth-form-transparent text-left p-3">
+                  <div class="brand-logo">
+                    <img src="../../images/logo.svg" alt="DESKPORT">
+                  </div>
+                  <h4>Welcome back!</h4>
+                  <h6 class="font-weight-light">Happy to see you again!</h6>
+                  <form class="pt-3" action="Admin_Dashboard" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputEmail">Username</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend bg-transparent">
+                          <span class="input-group-text bg-transparent border-right-0">
+                            <i class="fa fa-user text-primary"></i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Username" name="username">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword">Password</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend bg-transparent">
+                          <span class="input-group-text bg-transparent border-right-0">
+                            <i class="fa fa-lock text-primary"></i>
+                          </span>
+                        </div>
+                        <input type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password" name="password">                        
+                      </div>
+                    </div>
+                    <div class="error_msg">{{message.error}}</div>
+                    <div class="my-2 d-flex justify-content-between align-items-center">
+                      <div class="form-check">
+                        <input type="checkbox" name="remember_me" class="form-check-input" value="True" style="display: inline; margin-left: 3px; position: absolute; top: -3px;" >
+                        <label class="form-check-label text-muted">
+                          Keep me signed in
+                        </label>
+                      </div>
+                      <a href="Forgot_Password_Page1" class="auth-link text-black">Forgot password?</a>
+                    </div>
+                    <div class="my-3">
+                      <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"><span style="margin: auto; position: relative; top: -4px;">LOGIN</span></button>
+                    </div>
+                    <div class="mb-2 d-flex">
+                      <button type="button" class="btn btn-facebook auth-form-btn flex-grow mr-1">
+                        <i class="fab fa-facebook-f mr-2"></i>Facebook
+                      </button>
+                      <button type="button" class="btn btn-google auth-form-btn flex-grow ml-1">
+                        <i class="fab fa-google mr-2"></i>Google
+                      </button>
+                    </div>
+                    <div class="text-center mt-4 font-weight-light">
+                      Don't have an account? <a href="Register_Page" class="text-primary">Create</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-lg-6 login-half-bg d-flex flex-row">
+                <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2020  All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>        
+    </div>
+
+    <script src="{% static 'Script/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'Script/vendor.bundle.addons.js' %}"></script>
+    <script src="{% static 'Script/off-canvas.js' %}"></script>
+    <script src="{% static 'Script/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'Script/misc.js' %}"></script>
+    <script src="{% static 'Script/settings.js' %}"></script>
+    <script src="{% static 'Script/todolist.js' %}"></script>    
+    
+</body>
+</html>

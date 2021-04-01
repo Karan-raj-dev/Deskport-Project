@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+        {% block content %}
+
+        <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                    Edit Custom Field
+                </h3>
+                <div style="float: right;">
+                    <a href="/Custom_Fields"><button type="button" class="btn btn-primary btn-sm"  style="font-size: 15px;">Back</button></a>
+                </div>
+              </div>              
+              
+              <!--Form for edit custom field-->
+
+              <div class="card">
+                <div class="card-body">
+                                <form id="customform" action="/Custom_Fields_Update/{{cf_data.id}}" method="POST">{% csrf_token %}
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Name</label>
+                                        <input type="text" id="custom-field-name" class="form-control" value="{{cf_data.customfieldname}}" name="customfieldname">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Type</label>
+                                        <select class="form-control" id="custom-field-type" style="font-size: 15px; height: 45px;" name="customfieldtype">
+                                            <option value="{{cf_data.customfieldtype}}">{{cf_data.customfieldtype}}</option>
+                                            <option value="text">text</option>
+                                            <option value="select">select</option>
+                                            <option value="file">file</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Placeholder</label>
+                                        <input type="text" id="custom-field-placeholder" class="form-control" value="{{cf_data.customfieldplaceholder}}" name="customfieldplaceholder">                                              
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Field Length</label>
+                                        <input type="number" id="custom-field-fieldlength" class="form-control" value="{{cf_data.customfieldfieldlength}}" name="customfieldfieldlength">                                            
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <label>Required</label>
+                                    <div class="radios">
+                                        <input type="radio" name="customfieldrequired" class="required" value="Yes"><span>Yes</span>
+                                        <input type="radio" name="customfieldrequired" class="required" value="No"><span>No</span>
+                                    </div>                                            
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Status</label>
+                                    <div class="radios">
+                                    <input type="radio" name="customfieldstatus" class="status" value="Active"><span>Active</span>
+                                    <input type="radio" name="customfieldstatus" class="status" value="Inactive"><span>Inactive</span>
+                                    </div> 
+                                </div>
+                            </div>                                    
+                        </div>
+                        <div class="modal-footer" style="margin-top: 20px;">
+                            <div class="error_msg" id="incompleteform" style="display: none;top: -45px;">Please fill up all the fields</div>
+                            <button type="submit" class="btn btn-success" onclick="return validate()" style="background-color: blue; border: none;">Save</button>
+                        </div>
+                        </form>          
+                </div>
+              </div>
+              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+          <div id="successpopup">
+            <img src="{% static 'Resource/sucessgif.gif' %}" alt="Sucess">
+            <div>
+              <h3>The Custom field is edited successfully</h3>
+              <p>Your custom field can be used now!</p>
+            </div>
+          </div>
+          <script>
+            var pop=document.getElementById("successpopup");
+          var form=document.getElementById("customform");
+          var errormsg=document.getElementById("incompleteform");
+          var flag1=0;
+          var flag2=0;
+          function validate(){
+            
+            errormsg.style.display="none";
+              var customfieldname=document.getElementById("custom-field-name").value;
+              var customfieldtype=document.getElementById("custom-field-type").value;
+              var customfieldplaceholder=document.getElementById("custom-field-placeholder").value;
+              var customfieldfieldlength=document.getElementById("custom-field-fieldlength").value;
+              var required=document.getElementsByClassName("required");
+              var status=document.getElementsByClassName("status");
+              for(var i=0;i<required.length;i++){
+                if(required[i].checked){
+                  this.flag1=1;
+                }
+              }
+              for(var i=0;i<status.length;i++){
+                if(status[i].checked){
+                  this.flag2=1;
+                }
+              }
+              if(customfieldname=="" || customfieldtype=="" || customfieldplaceholder=="" || customfieldfieldlength=="" || this.flag1==0 || this.flag2==0){
+                errormsg.style.display="block";
+              }
+              else{
+                pop.style.display="block";
+                window.setTimeout(()=>{
+                  form.submit();
+                },2000)
+              }
+              return false;
+          }
+          </script>
+        
+
+
+        {% endblock %}

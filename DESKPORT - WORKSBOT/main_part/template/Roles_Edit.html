@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+        {% block content %}
+
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                    Edit Roles
+                </h3>
+                <div style="float: right;">
+                    <a href="/Roles"><button type="button" class="btn btn-primary btn-sm" style="font-size: 15px;">Back</button></a>
+                </div>
+              </div>              
+              
+              <!--Form for edit role-->
+
+              <div class="card">
+                <div class="card-body" style="padding: 2% 20%;">
+                    <form id="roles" action="/Roles_Update/{{r_data.id}}" method="POST">{% csrf_token %}
+                        <label>Title</label>
+                        <input type="text" id="role-title" class="form-control" value="{{r_data.roletitle}}" name="roletitle">
+                        <label>Settings</label>
+                        <div><input type="checkbox" class="settings-role" name="settingsrole" value="Can manage app settings"><span>Can manage app settings</span></div>
+                        <div><input type="checkbox" class="settings-role" name="settingsrole" value="Can manage email settings"><span>Can manage email settings</span></div>
+                        <div><input type="checkbox" class="settings-role" name="settingsrole" value="Can manage email templete"><span>Can manage email templete</span></div>
+                        <label>Frontend Settings</label>
+                        <div><input type="checkbox" class="frontend-settings-role" name="frontendsettingsrole" value="Can manage logo icon"><span>Can manage logo icon</span></div>
+                        <div><input type="checkbox" class="frontend-settings-role" name="frontendsettingsrole" value="Can manage social link"><span>Can manage social link</span></div>
+                        <div><input type="checkbox" class="frontend-settings-role" name="frontendsettingsrole" value="Can manage banner text"><span>Can manage banner text</span></div>
+                        <div><input type="checkbox" class="frontend-settings-role" name="frontendsettingsrole" value="Can manage testimonial"><span>Can manage testimonial</span></div>
+                        <div><input type="checkbox" class="frontend-settings-role" name="frontendsettingsrole" value="Can manage service"><span>Can manage service</span></div>
+                        <div><input type="checkbox" class="frontend-settings-role" name="frontendsettingsrole" value="Can manage About Us"><span>Can manage About Us</span></div>
+                        <div><input type="checkbox" class="frontend-settings-role" name="frontendsettingsrole" value="Can manage tickets"><span>Can manage tickets</span></div>
+                        <label>Departments</label>
+                        <div><input type="checkbox" class="departments-settings-role" name="departmentssettingsrole" value="Can manage department"><span>Can manage department</span></div>
+                        <label>Knowledge Base</label>
+                        <div><input type="checkbox" class="knowledge-settings-role" name="knowledgesettingsrole" value="Can manage knownledge base"><span>Can manage knownledge base</span></div>
+                        <label>Staffs</label>
+                        <div><input type="checkbox" class="staff-settings-role" name="staffsettingsrole" value="Can manage staff's"><span>Can manage staff's</span></div>
+                        <label>Users</label>
+                        <div><input type="checkbox" class="user-settings-role" name="usersettingsrole" value="Can manage user's"><span>Can manage user's</span></div>
+                        <hr>
+                        <div class="error_msg" id="incompleteform" style="display: none;">Please fill up all the fields</div>
+
+                        <input type="submit" value="Save" onclick="return validate()" class="btn" style="padding: 1%; text-align: center; width: 100%; background-color: #392C70; border: none; color: white;">
+                        <!--Have to chage color-->
+                    </form>
+                  
+                </div>
+              </div>
+              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+          <div id="successpopup">
+            <img src="{% static 'Resource/sucessgif.gif' %}" alt="Sucess">
+            <div>
+              <h3>The Role is edited successfully</h3>
+              <p>Your role field can be used now!</p>
+            </div>
+          </div>
+          <script>
+            var pop=document.getElementById("successpopup");
+          var form=document.getElementById("roles");
+          var errormsg=document.getElementById("incompleteform");
+          var flag1=0;
+          var flag2=0;
+          var flag3=0;
+          var flag4=0;
+          var flag5=0;
+          var flag6=0;
+          function validate(){
+            
+            errormsg.style.display="none";
+              var roletitle=document.getElementById("role-title").value;
+              var settingsrole=document.getElementsByClassName("settings-role");
+              var frontendsettingsrole=document.getElementsByClassName("frontend-settings-role");
+              var departmentssettingsrole=document.getElementsByClassName("departments-settings-role");
+              var knowledgesettingsrole=document.getElementsByClassName("knowledge-settings-role");
+              var staffsettingsrole=document.getElementsByClassName("staff-settings-role");
+              var usersettingsrole=document.getElementsByClassName("user-settings-role");
+              for(var i=0;i<settingsrole.length;i++){
+                if(settingsrole[i].checked){
+                  this.flag1=1;
+                }
+              }
+              for(var i=0;i<frontendsettingsrole.length;i++){
+                if(frontendsettingsrole[i].checked){
+                  this.flag2=1;
+                }
+              }
+              for(var i=0;i<departmentssettingsrole.length;i++){
+                if(departmentssettingsrole[i].checked){
+                  this.flag3=1;
+                }
+              }for(var i=0;i<knowledgesettingsrole.length;i++){
+                if(knowledgesettingsrole[i].checked){
+                  this.flag4=1;
+                }
+              }for(var i=0;i<staffsettingsrole.length;i++){
+                if(staffsettingsrole[i].checked){
+                  this.flag5=1;
+                }
+              }for(var i=0;i<usersettingsrole.length;i++){
+                if(usersettingsrole[i].checked){
+                  this.flag6=1;
+                }
+              }
+              if( roletitle=="" || flag1==0 || flag2==0 || flag3==0 || flag4==0 || flag5==0 || flag6==0){
+                errormsg.style.display="block";
+              }
+              else{
+                pop.style.display="block";
+                window.setTimeout(()=>{
+                  form.submit();
+                },2000)
+              }
+              return false;
+          }
+          </script>
+
+          {% endblock %}
+       

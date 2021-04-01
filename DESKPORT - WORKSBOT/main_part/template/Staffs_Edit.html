@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+        {% block content %}
+
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                    Edit Staff
+                </h3>
+                <div style="float: right;">
+                    <a href="/Staffs"><button type="button" class="btn btn-primary btn-sm" style="font-size: 15px;">Back</button></a>
+                </div>
+              </div>              
+              
+              <!--Table-->
+
+              <div class="card">
+                <div class="card-body">
+                  <form id="staffform" action="/Staffs_Update/{{s_data.id}}" method="POST">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                            <input type="text" id="staff-name" class="form-control" name="staffname" value="{{s_data.staffname}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Email</label>
+                            <input type="email" id="staff-email" class="form-control" name="staffemail" value="{{s_data.staffemail}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Department</label>
+                            <select class="form-control" id="staff-department" name="staffdepartment">
+                                <option value="{{s_data.staffdepartment}}">{{s_data.staffdepartment}}</option>
+                                <option value="Host">Host</option>
+                                <option value="Domain">Domain</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Role</label>
+                            <select class="form-control" id="staff-role" name="staffrole">
+                                <option value="{{s_data.staffrole}}">{{s_data.staffrole}}</option>
+                                <option value="Test">Test</option>
+                                <option value="Front end Developer">Front end Developer</option>
+                                <option value="Back end Developer">Back end Developer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Status</label>
+                            <select class="form-control" id="staff-status" name="staffstatus">
+                                <option value="{{s_data.staffstatus}}">{{s_data.staffstatus}}</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Password</label>
+                            <input type="text" class="form-control" id="staff-password" style="height: 37px;" name="staffpassword" value="{{s_data.staffpassword}}">
+                        </div>
+                    </div>
+                    <div class="error_msg" id="incompleteform" style="display: none;">Please fill up all the fields</div>
+                    <input type="submit" value="Save Edit" onclick="return validate()" class="btn"style="padding: 1%; text-align: center; width: 100%; background-color: #392C70; border: none; color: white;">
+                    <!--Have to chage color-->
+                  </form>
+                </div>
+              </div>
+              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+          <div id="successpopup">
+            <img src="{% static 'Resource/sucessgif.gif' %}" alt="Sucess">
+            <div>
+              <h3>The Staff is edited successfully</h3>
+              <p>Your staff can be used now!</p>
+            </div>
+          </div>
+          <script>
+            var pop=document.getElementById("successpopup");
+          var form=document.getElementById("staffform");
+          var errormsg=document.getElementById("incompleteform");
+          
+          function validate(){
+    
+
+            errormsg.style.display="none";
+              var staffname=document.getElementById("staff-name").value;
+              var staffemail=document.getElementById("staff-email").value;
+              var staffdepartment=document.getElementById("staff-department").value;
+              var staffrole=document.getElementById("staff-role").value;
+              var staffstatus=document.getElementById("staff-status").value;
+              var staffpassword=document.getElementById("staff-password").value;
+
+              
+              if(staffname=="" || staffemail=="" || staffdepartment=="" || staffrole=="" || staffstatus=="" || staffpassword==""){
+                errormsg.style.display="block";
+              }
+              else{
+                pop.style.display="block";
+                window.setTimeout(()=>{
+                  form.submit();
+                },2000)
+              }
+              return false;
+          }
+          </script>
+        
+          {% endblock %}

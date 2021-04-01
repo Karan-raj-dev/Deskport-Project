@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+        {% block content %}
+
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                    Knowledge Base
+                </h3>
+                <div style="float: right;">
+                    <a href="K_add"><button type="button" class="btn btn-primary btn-sm" style="font-size: 15px;">Add New</button></a>
+                </div>
+              </div>              
+              
+              <!--Table-->
+
+              <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                          <select class="form-control" style="padding: 5px; padding-right: 70px;">
+                              <option value="All Category">All Category</option>
+                              <option value="Host">Host</option>
+                              <option value="Domain">Domain</option>
+                              <option value="IT">IT</option>
+                              <option value="Web-development">Web Development</option>
+                              <option value="Home-delivery">Home Delivery</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <select class="form-control" style="padding: 5px; padding-right: 70px;">
+                              <option value="All Pinned">All Pinned</option>
+                              <option value="Yes">Yes</option>
+                              <option value="No">No</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" style="padding: 5px; padding-right: 70px;">
+                                <option value="Status">Status All</option>
+                                <option value="Published">Published</option>
+                                <option value="Unpublished">Unpublished</option>
+                            </select>
+                        </div>
+                    </div>
+                  <div class="row" style="margin-top: 15px;">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table id="order-listing" class="table table-striped">
+                          <thead>
+                            <tr>
+                                <th>SL NO</th>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Category</th>
+                                <th>Views</th>
+                                <th>Pinned</th>
+                                <th>Created By</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              {% for data in kb_data %}
+                            <tr>
+                                <td>{{data.id}}</td>
+                                <td>{{data.knowlegebasetitle}}</td>
+                                <td>{{data.knowlegebasedescription}}</td>
+                                <td>{{data.knowlegebaseDepartment}}</td>
+                                <td>27</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"><span class="slider-yes">Yes</span><span class="slider-no">No</span></span>
+                                    </label>
+                                </td>
+                                <td>Diana Prince</td>
+                                <td>
+                                    <label class="badge badge-success open-label">{{data.knowlegebaserequired}}</label>
+                                </td>
+                                <td>
+                                    <a href="Knowledge_Base_Edit/{{data.id}}"><button class="edit-btn"><i class="fa fa-edit"></i></button></a>
+                                    <a href="Knowledge_Base_Delete/{{data.id}}"><button class="delete-btn"><i class="fa fa-trash"></i></button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+
+          {% endblock %}
+        

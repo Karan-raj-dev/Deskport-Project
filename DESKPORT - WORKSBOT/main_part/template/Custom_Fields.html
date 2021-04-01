@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+        {% block content %}
+
+          <div class="main-panel" style="float: left;">
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                  Custom Fields
+                </h3>
+                <!--Model for new custom field-->
+                    <div style="float: right;">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#new-custom-field" style="font-size: 15px;"><i class="fa fa-plus" style="margin-right: 10px;"></i>Add New</button>
+                    </div>
+                    <div class="modal fade" id="new-custom-field" tabindex="-1" role="dialog" aria-labelledby="new-custom-field" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                    <i class="fa fa-share-square" style="font-size: 30px; position: absolute; top: 30px"></i><h4 class="modal-title" style="margin-left: 35px; font-weight: 500;">Add Custom Field</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; top:5px; right: 10px;">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                              </div>
+                                <div class="modal-body" style="padding: 20px;">                                    
+                                    <form id="customform" action="Custom_Fields" method="POST">{% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                                <input type="text" id="custom-field-name" class="form-control" placeholder="Enter name" name="customfieldname">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Type</label>
+                                                <select class="form-control" id="custom-field-type" style="font-size: 15px; height: 45px;" name="customfieldtype">
+                                                    <option value="text">text</option>
+                                                    <option value="select">select</option>
+                                                    <option value="file">file</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Placeholder</label>
+                                              <input type="text" id="custom-field-placeholder" class="form-control" placeholder="Enter placeholder" name="customfieldplaceholder">                                              
+                                          </div>
+                                          <div class="col-md-6">
+                                              <label>Field Length</label>
+                                              <input type="number" id="custom-field-fieldlength" class="form-control" placeholder="Enter field length" name="customfieldfieldlength">                                            
+                                          </div>
+                                      </div>
+                                      <div class="row" style="margin-top: 20px;">
+                                        <div class="col-md-6">
+                                            <label>Required</label>
+                                            <div class="radios">
+                                              <input type="radio" name="customfieldrequired" class="required" value="Yes"><span>Yes</span>
+                                              <input type="radio" name="customfieldrequired" class="required" value="No"><span>No</span>
+                                            </div>                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label>Status</label>
+                                          <div class="radios">
+                                            <input type="radio" name="customfieldstatus" class="status" value="Active"><span>Active</span>
+                                            <input type="radio" name="customfieldstatus" class="status" value="Inactive"><span>Inactive</span>
+                                          </div> 
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="modal-footer" style="margin-top: 20px;">
+                                  <div class="error_msg" id="incompleteform" style="display: none;top: -45px;left: 170px;">Please fill up all the fields</div>
+                                  <button type="button" class="btn btn-info" data-dismiss="modal" style="background-color: darkturquoise; border: none;"><i class="fa fa-times" style="margin-right: 5px"></i>Close</button>
+                                  <button type="submit" class="btn btn-success" onclick="return validate()" style="background-color: blue; border: none;">Save</button>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+              <!--Model ends-->
+              </div>              
+              
+              <!--Table-->
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table id="order-listing" class="table table-striped">
+                          <thead>
+                            <tr>
+                                <th>SL NO</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Require</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for data in cf_data%}
+                            <tr>
+                                <td>{{data.id}}</td>
+                                <td>{{data.customfieldname}}</td>
+                                <td>{{data.customfieldtype}}</td>
+                                <td>{{data.customfieldrequired}}</td>
+                                <td>{{data.customfieldstatus}}</td>
+                                <td>
+                                    <a href="Custom_Fields_Edit/{{data.id}}"><button class="edit-btn" data-toggle="modal" data-target="#edit_custom_field"><i class="fa fa-edit"></i></button></a>
+                                    <a href="Custom_Fields_Delete/{{data.id}}"><button class="delete-btn"><i class="fa fa-trash"></i></button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 Deskport. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+              </div>
+            </footer>
+          </div>
+          
+          <script>
+            var pop=document.getElementById("successpopup");
+          var form=document.getElementById("customform");
+          var errormsg=document.getElementById("incompleteform");
+          
+          function validate(){
+            var flag1=0;
+            var flag2=0;
+            errormsg.style.display="none";
+              var customfieldname=document.getElementById("custom-field-name").value;
+              var customfieldtype=document.getElementById("custom-field-type").value;
+              var customfieldplaceholder=document.getElementById("custom-field-placeholder").value;
+              var customfieldfieldlength=document.getElementById("custom-field-fieldlength").value;
+              var required=document.getElementsByClassName("required");
+              var status=document.getElementsByClassName("status");
+              for(var i=0;i<required.length;i++){
+                if(required[i].checked){
+                  flag1=1;
+                }
+              }
+              for(var i=0;i<status.length;i++){
+                if(status[i].checked){
+                  flag2=1;
+                }
+              }
+              if(customfieldname=="" || customfieldtype=="" || customfieldplaceholder=="" || customfieldfieldlength=="" || flag1==0 || flag2==0){
+                errormsg.style.display="block";
+              }
+              else{
+                window.setTimeout(()=>{
+                  form.submit();
+                },0)
+              }
+              return false;
+          }
+          </script>
+        
+          {% endblock %}
